@@ -1,21 +1,14 @@
-"""
-Lanza un POST a /actualizar_clima/ y termina.
-"""
-import os, asyncio, httpx, sys
+# update_weather.py
+import os
+import requests
 
-API   = os.getenv("API_URL")   # p.ej. https://mi-proyecto-production.up.railway.app
+def main() -> None:
+    url   = os.environ["UPDATE_URL"]          # ej: https://wheater-forecast.up.railway.app/actualizar
+    token = os.environ.get("API_TOKEN", "")   # si tu endpoint usa auth
 
-
-if not API:
-    sys.exit("API_URL no definido")
-
-async def main():
-    async with httpx.AsyncClient(timeout=30) as client:
-        r = await client.post(
-            f"{API}/actualizar_clima/"
-        )
-        r.raise_for_status()
-        print(r.json())
+    resp = requests.post(url, headers={"Authorization": f"Bearer {token}"})
+    resp.raise_for_status()
+    print("Clima actualizado:", resp.status_code)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
