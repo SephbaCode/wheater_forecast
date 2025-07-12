@@ -1,0 +1,56 @@
+# Bytecode de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+.env/
+.env.local
+
+# Archivos de configuración de entorno
+.env
+*.env
+
+# Archivos temporales o de ejecución
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Configuración de VSCode u otros editores
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Archivos de compilación
+build/
+dist/
+*.egg-info/
+
+# Bases de datos locales o temporales
+*.sqlite3
+*.db
+
+# Configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de exportación
+*.csv
+*.json
+
+# Node (si usas Supabase CLI o funciones edge con JavaScript)
+node_modules/
+
+# Git
+.git/
+
+# Python notebooks (opcional si no quieres subirlos)
+*.ipynb_checkpoints/
+
+# API Keys (¡muy importante!)
+apikeys.json
+secrets.json
