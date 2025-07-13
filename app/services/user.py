@@ -7,19 +7,21 @@ load_dotenv()
 
 def login_user(user_name, password): 
     try:
+        user_name = user_name.strip()
+        password = password.strip()
+
         response = supabase.rpc("check_user_credentials", {
             "p_user_name": user_name,
             "p_password": password
         }).execute()
-        
-        if response == True:
-            print("Usuario autenticado correctamente.")
+
+        print(f"Response from check_user_credentials: {response}")
+
+        if response.data is True:
             return True
         else:
-            print("Credenciales incorrectas.")
             return False    
         
     except Exception as e:
         print(f"Error al verificar las credenciales del usuario: {e}")
         return False
-    
