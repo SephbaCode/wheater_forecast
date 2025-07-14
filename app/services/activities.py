@@ -7,7 +7,7 @@ load_dotenv()
 
 def get_activity():
     try:
-        response = supabase.rpc("get_activitys").execute()
+        response = supabase.rpc("get_activities").execute()
         return response.data if response.data else []
     except Exception as e:
         print(f"Error al obtener las actividades: {e}")

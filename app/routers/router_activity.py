@@ -1,10 +1,13 @@
+from datetime import datetime
+from typing import Optional
 from fastapi import APIRouter
-from app.services.activitys import get_activity, insert_activity_with_audit
+from app.services.activities import get_activity, insert_activity_with_audit
+from app.services.routines import register_routine
 
 router = APIRouter(prefix="", tags=["Actividades"])
 
 
-@router.get("/get_activitys/")
+@router.get("/get_activities/")
 def get_activitys():
     response = get_activity()
     
@@ -14,7 +17,7 @@ def get_activitys():
         return {"status": "ERROR", "detalle": "No se encontraron actividades"}
     
     
-@router.post("/activitys/")
+@router.post("/create_activity/")
 def create_activity(user_name: str, activity_name: str, description: str = ""):
     success = insert_activity_with_audit(user_name, activity_name, description)
     if success == True:
