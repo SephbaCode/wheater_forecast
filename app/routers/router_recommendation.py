@@ -33,6 +33,6 @@ def get_user_recommendations(user_name: str):
     response = get_recommendations_by_user(user_name)
     
     if isinstance(response, list):
-        return {"status": "OK", "message": "Recomendaciones del usuario obtenidas", "data": response}
+        return {"status": "OK", "message": "Recomendaciones del usuario obtenidas"}
     else:
         return {"status": "ERROR", "message": "No se pudieron obtener las recomendaciones del usuario", "error": str(response)}
