@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from fastapi import APIRouter
-from app.services.activities import get_activity, insert_activity_with_audit
+from app.services.activities import get_activity, insert_activity_with_audit, edit_activity_with_audit
 from app.services.routines import register_routine
 
 router = APIRouter(prefix="", tags=["Actividades"])
@@ -25,3 +25,15 @@ def create_activity(user_name: str, activity_name: str, description: str = ""):
     else:
         return {"status": "ERROR", "message": "No se pudo crear la actividad", "error": str(success)}
     
+@router.post("/edit_activity/")
+def edit_activity(
+    user_name: str, 
+    activity_id: int, 
+    new_name: str, 
+    new_description: Optional[str] = ""
+):
+    success = edit_activity_with_audit(user_name, activity_id, new_name, new_description)
+    if success == True:
+        return {"status": "OK", "message": "Actividad editada y auditada"}
+    else:
+        return {"status": "ERROR", "message": "No se pudo editar la actividad", "error": str(success)}
