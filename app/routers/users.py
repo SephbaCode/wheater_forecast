@@ -24,9 +24,17 @@ def register_query(
     lon: Optional[float] = None,
     city_id: Optional[int] = None,
 ):
+    
     user_id = register_user(user_name, password, lat, lon, city_id)
-
-    if user_id:
-        return {"status": "OK", "mensaje": "Usuario creado", "user_id": user_id}
+    if user_id is None:
+        raise HTTPException(
+            status_code=400,
+            detail="No se pudo crear el usuario. Usuario ya existente."
+        )
     else:
-        raise HTTPException(status_code=400, detail="No se pudo crear el usuario")
+        return {
+            "status": "OK",
+            "mensaje": "Usuario creado",
+            "user_id": user_id
+        }
+    

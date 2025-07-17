@@ -60,4 +60,4 @@ def register_user(
 
     except Exception as e:
         print(f"Error al crear el usuario: {e}")
-        return e
+        return None
