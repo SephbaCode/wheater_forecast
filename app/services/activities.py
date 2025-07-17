@@ -30,4 +30,26 @@ def insert_activity_with_audit(user_name: str, activity_name: str, description: 
     except Exception as e:
         print(f"Exception calling insert_activity_with_audit: {e}")
         return e
+    
+def edit_activity_with_audit(user_name: str,
+                             activity_id: int,
+                             new_name: str,
+                             new_description: str | None = None
+                             ) -> bool:
+    try:
+        response = supabase.rpc(
+            "edit_activity_concurrent_safe",
+            {
+                "p_user_name": user_name,
+                "p_activity_id": activity_id,
+                "p_new_name": new_name,
+                "p_new_description": new_description
+            }
+        ).execute()
+
+        print(f"Response from edit_activity_concurrent_safe: {response}")
+        return True
+    except Exception as e:
+        print(f"Exception calling edit_activity_concurrent_safe: {e}")
+        return e
 
