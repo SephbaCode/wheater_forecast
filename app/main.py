@@ -9,6 +9,15 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI(title="Planificador Climático")
+
+# Permitir frontend local
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(weather_router, prefix="/clima", tags=["Clima"])
 app.include_router(user_router, prefix="/usuarios", tags=["Usuarios"])
 app.include_router(activity_router, prefix="/actividades", tags=["Actividades"])   
